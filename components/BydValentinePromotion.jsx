@@ -8,7 +8,7 @@ import {
 	CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const BydValentinePromotion = () => {
+const BydSealPromote = () => {
 	const images = [
 		{
 			src: "/images/BYD1.jpg",
@@ -37,40 +37,28 @@ const BydValentinePromotion = () => {
 	];
 
 	return (
-		<div className="h-auto bg-gradient-to-b from-pink-50 to-accent">
-			<div className="container mx-auto px-4 py-8">
-				<div className="text-center mb-8">
-					<h1 className="text-3xl md:text-4xl font-bold text-pink-600 mb-4">
-						💖หวานใจต้องมี หวานนี้พิเศษกับ BYD
-					</h1>
-					<p className="text-xl md:text-2xl text-pink-500 mb-6">
-						✨ดาวน์เริ่ม 5% ทุกรุ่น✨
-					</p>
-				</div>
-
-				<Carousel className="w-full max-w-4xl mx-auto">
-					<CarouselContent>
+		<div className="relative h-auto bg-gradient-to-b from-pink-50 to-accent w-full">
+			<div className="py-8">
+				<Carousel className="w-full">
+					<CarouselContent className="!ml-0">
 						{images.map((image, index) => (
-							<CarouselItem key={index}>
-								<Card className="border-none shadow-xl">
-									<CardContent className="p-0">
-										<div className="relative aspect-square rounded-lg overflow-hidden">
-											<img
-												src={image.src}
-												alt={image.alt}
-												className="w-full h-full object-cover"
-											/>
-										</div>
+							<CarouselItem key={index} className="!pl-0">
+								<Card className="border-none">
+									<CardContent className="relative p-0">
+										<img
+											src={image.src}
+											alt={image.alt}
+											className="w-screen h-auto object-cover" /* เปลี่ยนจาก w-full เป็น w-screen */
+										/>
+										<CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white hover:bg-black/70 rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center" />
+										<CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white hover:bg-black/70 rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center" />
 									</CardContent>
 								</Card>
 							</CarouselItem>
 						))}
 					</CarouselContent>
-					<CarouselPrevious className="text-pink-600 hover:text-pink-700" />
-					<CarouselNext className="text-pink-600 hover:text-pink-700" />
 				</Carousel>
-
-				<div className="text-center mt-8 space-y-4">
+				<div className="text-center mt-8 space-y-4 md:hidden">
 					<p className="text-lg text-gray-700">💞 ให้ BYD เป็นของขวัญแทนใจ</p>
 					<p className="text-lg text-gray-700">
 						💞 ดาวน์เริ่มต้น 5% ขับกลับบ้านได้เลย
@@ -84,4 +72,4 @@ const BydValentinePromotion = () => {
 	);
 };
 
-export default BydValentinePromotion;
+export default BydSealPromote;
