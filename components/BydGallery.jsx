@@ -5,6 +5,7 @@ import {
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
+	CarouselPagination,
 } from "@/components/ui/carousel";
 
 import { PulseBeams } from "@/components/ui/PulseBeams";
@@ -25,6 +26,16 @@ const BydGallery = () => {
 					"/images/seal/interior-03.jpg",
 					"/images/seal/interior-04.jpg",
 					"/images/seal/interior-05.jpg",
+				],
+			},
+		},
+		feature: {
+			name: "BYD FEATURE",
+			images: {
+				feature: [
+					"/images/feature/feature-01.jpg",
+					"/images/feature/feature-02.jpg",
+					"/images/feature/feature-03.jpg",
 				],
 			},
 		},
@@ -60,7 +71,7 @@ const BydGallery = () => {
 				</video>
 			</div>
 			{Object.entries(galleryData).map(([model, data]) => (
-				<section key={model} className="mb-8">
+				<section key={model}>
 					{/* <motion.h2
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
@@ -70,59 +81,91 @@ const BydGallery = () => {
 					</motion.h2> */}
 
 					{/* Exterior Gallery */}
-
-					<Carousel className="w-full">
-						<CarouselContent>
-							{data.images.exterior.map((src, index) => (
-								<CarouselItem key={index} className="pl-0">
-									<div className="relative aspect-video">
-										<img
-											src={src}
-											alt={`${data.name} exterior ${index + 1}`}
-											className="w-full h-full object-cover md:object-center object-[center_25%] sm:object-[center_35%]"
-										/>
-									</div>
-								</CarouselItem>
-							))}
-						</CarouselContent>
-						<CarouselPrevious
-							variant="ghost"
-							className="-left-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
-						/>
-						<CarouselNext
-							variant="ghost"
-							className="-right-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
-						/>
-					</Carousel>
+					{data.images.exterior && (
+						<Carousel className="w-full">
+							<CarouselContent>
+								{data.images.exterior.map((src, index) => (
+									<CarouselItem key={index} className="pl-0">
+										<div className="relative aspect-video">
+											<img
+												src={src}
+												alt={`${data.name} exterior ${index + 1}`}
+												className="w-full h-full object-cover md:object-center object-[center_25%] sm:object-[center_35%]"
+											/>
+										</div>
+									</CarouselItem>
+								))}
+							</CarouselContent>
+							<CarouselPrevious
+								variant="ghost"
+								className="-left-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
+							/>
+							<CarouselNext
+								variant="ghost"
+								className="-right-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
+							/>
+							<CarouselPagination />
+						</Carousel>
+					)}
 
 					{/* Interior Gallery */}
+					{data.images.interior && (
+						<Carousel className="w-full ">
+							<CarouselContent>
+								{data.images.interior.map((src, index) => (
+									<CarouselItem key={index} className="pl-0">
+										<div className="relative aspect-video">
+											<img
+												src={src}
+												alt={`${data.name} interior ${index + 1}`}
+												className="w-full h-full object-cover"
+											/>
+										</div>
+									</CarouselItem>
+								))}
+							</CarouselContent>
+							<CarouselPrevious
+								variant="ghost"
+								className="-left-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
+							/>
+							<CarouselNext
+								variant="ghost"
+								className="-right-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
+							/>
+							<CarouselPagination />
+						</Carousel>
+					)}
 
-					<Carousel className="w-full">
-						<CarouselContent>
-							{data.images.interior.map((src, index) => (
-								<CarouselItem key={index} className="pl-0">
-									<div className="relative aspect-video">
-										<img
-											src={src}
-											alt={`${data.name} interior ${index + 1}`}
-											className="w-full h-full object-cover"
-										/>
-									</div>
-								</CarouselItem>
-							))}
-						</CarouselContent>
-						<CarouselPrevious
-							variant="ghost"
-							className="-left-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
-						/>
-						<CarouselNext
-							variant="ghost"
-							className="-right-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
-						/>
-					</Carousel>
-					<PulseBeams />
+					{/* Feature Gallery */}
+					{data.images.feature && (
+						<Carousel className="w-full">
+							<CarouselContent>
+								{data.images.feature.map((src, index) => (
+									<CarouselItem key={index} className="pl-0">
+										<div className="relative aspect-video">
+											<img
+												src={src}
+												alt={`${data.name} feature ${index + 1}`}
+												className="w-full h-full object-cover"
+											/>
+										</div>
+									</CarouselItem>
+								))}
+							</CarouselContent>
+							<CarouselPrevious
+								variant="ghost"
+								className="-left-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
+							/>
+							<CarouselNext
+								variant="ghost"
+								className="-right-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
+							/>
+							<CarouselPagination />
+						</Carousel>
+					)}
 				</section>
 			))}
+			<PulseBeams />
 
 			{/* Quick Specs Section */}
 			{/* 			<section className="bg-card p-4">

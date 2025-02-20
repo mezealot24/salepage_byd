@@ -161,6 +161,53 @@ const CarouselItem = React.forwardRef(({ className, ...props }, ref) => {
 });
 CarouselItem.displayName = "CarouselItem";
 
+const CarouselPagination = React.forwardRef(({ className, ...props }, ref) => {
+	const { api } = useCarousel();
+	const [selectedIndex, setSelectedIndex] = React.useState(0);
+	const [scrollSnaps, setScrollSnaps] = React.useState([]);
+
+	React.useEffect(() => {
+		if (!api) return;
+
+		setScrollSnaps(api.scrollSnapList());
+
+		const onSelect = () => {
+			setSelectedIndex(api.selectedScrollSnap());
+		};
+
+		api.on("select", onSelect);
+		return () => {
+			api.off("select", onSelect);
+		};
+	}, [api]);
+
+	return (
+		<div
+			ref={ref}
+			className={cn(
+				"absolute bottom-4 left-0 right-0 flex gap-2 justify-center items-center z-50",
+				className
+			)}
+			{...props}
+		>
+			{scrollSnaps.map((_, index) => (
+				<button
+					key={index}
+					className={cn(
+						"w-2 h-2 rounded-full transition-all",
+						selectedIndex === index
+							? "bg-white scale-100"
+							: "bg-white/50 scale-75 hover:bg-white/75"
+					)}
+					onClick={() => api?.scrollTo(index)}
+					aria-label={`Go to slide ${index + 1}`}
+				/>
+			))}
+		</div>
+	);
+});
+CarouselPagination.displayName = "CarouselPagination";
+
 const CarouselPrevious = React.forwardRef(
 	({ className, variant = "ghost", size = "icon", ...props }, ref) => {
 		const { orientation, scrollPrev, canScrollPrev } = useCarousel();
@@ -169,14 +216,14 @@ const CarouselPrevious = React.forwardRef(
 			<ChevronLeft
 				ref={ref}
 				className={cn(
-					"absolute h-8 w-8 cursor-pointer text-white",
+					"absolute h-8 w-8 cursor-pointer text-white transition-opacity duration-300",
 					orientation === "horizontal"
 						? "-left-12 top-1/2 -translate-y-1/2"
 						: "-top-12 left-1/2 -translate-x-1/2 rotate-90",
 					className
 				)}
 				onClick={canScrollPrev ? scrollPrev : undefined}
-				style={{ opacity: canScrollPrev ? 1 : 0.5 }}
+				style={{ opacity: canScrollPrev ? 1 : 0.2 }}
 				{...props}
 			/>
 		);
@@ -192,14 +239,14 @@ const CarouselNext = React.forwardRef(
 			<ChevronRight
 				ref={ref}
 				className={cn(
-					"absolute h-8 w-8 cursor-pointer text-white",
+					"absolute h-8 w-8 cursor-pointer text-white transition-opacity duration-300",
 					orientation === "horizontal"
 						? "-right-12 top-1/2 -translate-y-1/2"
 						: "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
 					className
 				)}
 				onClick={canScrollNext ? scrollNext : undefined}
-				style={{ opacity: canScrollNext ? 1 : 0.5 }}
+				style={{ opacity: canScrollNext ? 1 : 0.2 }}
 				{...props}
 			/>
 		);
@@ -213,4 +260,5 @@ export {
 	CarouselItem,
 	CarouselPrevious,
 	CarouselNext,
+	CarouselPagination,
 };
