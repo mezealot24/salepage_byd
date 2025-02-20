@@ -23,6 +23,8 @@ const BydGallery = () => {
 					"/images/seal/interior-01.jpg",
 					"/images/seal/interior-02.jpg",
 					"/images/seal/interior-03.jpg",
+					"/images/seal/interior-04.jpg",
+					"/images/seal/interior-05.jpg",
 				],
 			},
 		},
@@ -44,7 +46,7 @@ const BydGallery = () => {
 	};
 
 	return (
-		<div className="bg-background min-h-screen">
+		<div className="bg-background h-full">
 			<div className="relative aspect-video">
 				<video
 					className="w-full h-full object-cover"
@@ -68,58 +70,57 @@ const BydGallery = () => {
 					</motion.h2> */}
 
 					{/* Exterior Gallery */}
-					<div className="mb-8">
-						<Carousel className="w-full">
-							<CarouselContent>
-								{data.images.exterior.map((src, index) => (
-									<CarouselItem key={index} className="pl-0">
-										<div className="relative aspect-video">
-											<img
-												src={src}
-												alt={`${data.name} exterior ${index + 1}`}
-												className="w-full h-full object-cover md:object-center object-[center_25%] sm:object-[center_35%]"
-											/>
-										</div>
-									</CarouselItem>
-								))}
-							</CarouselContent>
-							<CarouselPrevious
-								variant="ghost"
-								className="-left-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
-							/>
-							<CarouselNext
-								variant="ghost"
-								className="-right-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
-							/>
-						</Carousel>
-					</div>
+
+					<Carousel className="w-full">
+						<CarouselContent>
+							{data.images.exterior.map((src, index) => (
+								<CarouselItem key={index} className="pl-0">
+									<div className="relative aspect-video">
+										<img
+											src={src}
+											alt={`${data.name} exterior ${index + 1}`}
+											className="w-full h-full object-cover md:object-center object-[center_25%] sm:object-[center_35%]"
+										/>
+									</div>
+								</CarouselItem>
+							))}
+						</CarouselContent>
+						<CarouselPrevious
+							variant="ghost"
+							className="-left-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
+						/>
+						<CarouselNext
+							variant="ghost"
+							className="-right-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
+						/>
+					</Carousel>
 
 					{/* Interior Gallery */}
-					<div className="mb-8">
-						<Carousel className="w-full">
-							<CarouselContent>
-								{data.images.interior.map((src, index) => (
-									<CarouselItem key={index} className="pl-0">
-										<div className="relative aspect-video">
-											<img
-												src={src}
-												alt={`${data.name} interior ${index + 1}`}
-												className="w-full h-full object-cover"
-											/>
-										</div>
-									</CarouselItem>
-								))}
-							</CarouselContent>
-							<CarouselPrevious
-								variant="ghost"
-								className="-left-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
-							/>
-							<CarouselNext
-								variant="ghost"
-								className="-right-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
-							/>
-						</Carousel>
-					</div>
+
+					<Carousel className="w-full">
+						<CarouselContent>
+							{data.images.interior.map((src, index) => (
+								<CarouselItem key={index} className="pl-0">
+									<div className="relative aspect-video">
+										<img
+											src={src}
+											alt={`${data.name} interior ${index + 1}`}
+											className="w-full h-full object-cover"
+										/>
+									</div>
+								</CarouselItem>
+							))}
+						</CarouselContent>
+						<CarouselPrevious
+							variant="ghost"
+							className="-left-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
+						/>
+						<CarouselNext
+							variant="ghost"
+							className="-right-2 h-12 w-12 md:h-16 md:w-16 border-0 bg-transparent hover:bg-transparent"
+						/>
+					</Carousel>
+					<PulseBeams />
 				</section>
 			))}
 
@@ -144,9 +145,6 @@ const BydGallery = () => {
 					</div>
 				</div>
 			</section> */}
-			<div className="max-w-screen mx-auto">
-				<PulseBeams />
-			</div>
 		</div>
 	);
 };

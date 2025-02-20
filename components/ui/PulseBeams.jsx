@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { HoverBorderGradient } from "./hover-border-gradient";
 
 const grad1 = {
 	initial: {
@@ -76,18 +77,25 @@ const grad5 = {
 	},
 };
 export const PulseBeams = () => {
+	const handleClick = () => {
+		// Line URL Scheme สำหรับเพิ่มเพื่อน
+		window.location.href = "line://ti/p/@bydmetromobile";
+
+		// Fallback สำหรับกรณีที่ไม่มีแอพ Line
+		setTimeout(() => {
+			window.location.href = "https://line.me/R/ti/p/@bydmetromobile";
+		}, 500);
+	};
+
 	return (
 		<div className="flex h-[20rem] sm:h-[30rem] md:h-[40rem] relative items-center justify-center antialiased bg-slate-950 overflow-hidden">
-			<button className="bg-slate-800 w-[100px] sm:w-[130px] md:w-[160px] h-[40px] sm:h-[50px] md:h-[60px] z-40 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block">
-				<span className="absolute inset-0 overflow-hidden rounded-full">
-					<span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-				</span>
-				<div className="relative flex justify-center w-[100px] sm:w-[130px] md:w-[160px] text-center space-x-2 h-[40px] sm:h-[50px] md:h-[60px] items-center z-10 rounded-full bg-zinc-950 py-0.5 px-4 ring-1 ring-white/10">
-					<span className="text-xs sm:text-sm md:text-base inline-block bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-green-500 to-neutral-900">
-						Line @official
-					</span>
-				</div>
-			</button>
+			<HoverBorderGradient
+				onClick={handleClick}
+				className="text-xs sm:text-sm md:text-base"
+				containerClassName="w-[100px] sm:w-[130px] md:w-[160px] h-[40px] sm:h-[50px] md:h-[60px]"
+			>
+				Line @official
+			</HoverBorderGradient>
 			{/* Core SVGs component */}
 			<div className="absolute inset-0 flex items-center justify-center">
 				<SVGs />

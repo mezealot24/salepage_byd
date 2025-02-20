@@ -63,7 +63,7 @@ const FadeInSection = ({ children, className = "", variant = "fadeInUp" }) => {
 
 export default function Page() {
 	return (
-		<div className="min-h-screen w-screen overflow-x-hidden">
+		<div className="h-screen w-screen overflow-x-hidden">
 			{/* Hero Section */}
 
 			<BydGallery />
